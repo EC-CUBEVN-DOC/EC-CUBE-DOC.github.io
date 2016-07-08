@@ -1,15 +1,15 @@
 ---
 layout: default
-title: API開発指針
+title: API developmemt Guideline
 ---
 
 ---
 
-EC-CUBE 3でAPIを開発するための指針をまとめたものです。
+This is document which summarized Guideline for developing API in EC-CUBE
 
-EC-CUBE 3では
+In EC-CUBE 3では
 
-* RESTの原則に基づいてAPI対応を行います。
+* Implement API handling based on principle of REST
 * RESTでは商品一覧、商品詳細といったそれぞれのリソースに対して固有の一意なURIが与えられ、そのURIに対してGETやPOST、PUT、DELETEといった
 HTTPメソッドでパラメータを送ることで投稿や削除などの操作を行います。
 
