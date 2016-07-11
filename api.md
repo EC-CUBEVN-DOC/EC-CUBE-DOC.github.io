@@ -7,43 +7,42 @@ title: API developmemt Guideline
 
 This is document which summarized Guideline for developing API in EC-CUBE
 
-In EC-CUBE 3では
+In EC-CUBE 3
 
 * Implement API handling based on principle of REST
-* RESTでは商品一覧、商品詳細といったそれぞれのリソースに対して固有の一意なURIが与えられ、そのURIに対してGETやPOST、PUT、DELETEといった
-HTTPメソッドでパラメータを送ることで投稿や削除などの操作を行います。
+* In REST, unique URI will be given for each resource which is called product list,　conduct operation such as submit and delete by sending parameter by HTTP method which is called GET and POST, PUT, DELETE with that URI.
 
-#### 関連ページ
+#### relevant page
 [Web API Authorization ガイド](/api_authorization.html)  
 [EC-CUBE API β版 プラグイン スタートアップガイド](/web-api-doc.html)
 
-## APIのエンドポイント
+## End point of API
 
-エンドポイントのベースURIは、https://ドメイン名/api/v1 とし、この後に各エンドポイントのパスを記述します。
+Base URI of End Point will set https://ドメイン名/api/v1 , after that descrive path of each End point.
 
 ```
-例) /products の場合
+Ex) In case of /products
 https://ドメイン名/api/v1/products
 ```
 
 
-## APIバージョニング
+## API versioning
 
-URLにバージョンを含めます。
+Include version in URL
 
 ```
 http://ドメイン名/api/v1/products
 ```
 
-今後APIのバージョンが上がった場合、`/v1`のバージョン部分が変更され、旧バージョンのAPIは互換性維持のために残しておきます。
-バージョンは整数のみとし、マイナーバージョンは作りません。
+In future, in case version up API, part of version of  `/v1` will be change, and API of old version will leave in order to maintain compatibility.
+Version is just interger, do not create minor version.
 
 
-## リソース名
+## resource name
 
 REST APIではURLでリソースを表現し、そのリソースへの操作をHTTPメソッドを用いて表現します。
 
-リソース例)
+resource example)
 
 |目的|URL|HTTPメソッド|
 |---|---|---|
@@ -54,13 +53,13 @@ REST APIではURLでリソースを表現し、そのリソースへの操作を
 |商品情報の削除|/products/:id|DELETE|
 
 
-* 小文字のみを使用する。
-* リソースを名詞で表す。
-* なるべく具体的な複数形の名詞を名称として付ける。
-* リソースの操作をHTTPメソッドで表す。
-* 分かりやすくするため`/products/:id/xxxxx`以上に深くなるURLは利用しない。
+* Just use lower case letter
+* Display resource by name
+* Put many basic concrete noun as name as much as possible
+* Show operation of resource by HTTP method
+* In order to be easy to understand, do not use deeply URL more than `/products/:id/xxxxx`.
 * URLは浅く保ち複雑なものはクエリストリングにする。
-* クエリストリング名は配列で複数渡すものについては複数形、一つだけ渡すものについては単数形とする。
+* About Query string name, if transfer many by array, will set plural form; if just transfer a part, will set singular form.
 
 ただし、RESTには必ずこだわらず利便性を重要視します。
 
