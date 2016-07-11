@@ -73,7 +73,7 @@ https://ドメイン名/api/v1/search?name=aaaa&price=1000
 
 
 
-## エラー処理
+## error process
 
 #### HTTPステータスコード
 エラー発生時にHTTPステータスコードを使いますが、HTTPステータスコードは全て網羅せず以下に止めておきます。
