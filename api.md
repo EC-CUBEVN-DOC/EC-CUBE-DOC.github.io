@@ -64,8 +64,8 @@ resource example)
 ただし、RESTには必ずこだわらず利便性を重要視します。
 
 
-## RESTに適さないAPI
-検索といったリソース操作でないAPIの場合、名詞でなく動詞を使います。
+## API tthat is not suitable for REST
+In case of API that is not resource operation which is called search, use verb, not noun.
 
 ```
 例)
