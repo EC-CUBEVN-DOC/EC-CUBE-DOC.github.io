@@ -61,10 +61,10 @@ resource example)
 * URLは浅く保ち複雑なものはクエリストリングにする。
 * About Query string name, if transfer many by array, will set plural form; if just transfer a part, will set singular form.
 
-ただし、RESTには必ずこだわらず利便性を重要視します。
+However, in REST emphasis the convience without regarding
 
 
-## API tthat is not suitable for REST
+## API that is not suitable for REST
 In case of API that is not resource operation which is called search, use verb, not noun.
 
 ```
@@ -90,24 +90,24 @@ https://ドメイン名/api/v1/search?name=aaaa&price=1000
 |500|Internal Server Error|サーバサイドでエラーが発生した場合に返される。|
 |503|Service Unavailable|サービス利用不可。サービスが一時的に過負荷やメンテナンスで使用不可能である。|
 
-* 参考 [https://ja.wikipedia.org/wiki/HTTPステータスコード](https://ja.wikipedia.org/wiki/HTTPステータスコード)
+* Reference  [https://ja.wikipedia.org/wiki/HTTPステータスコード](https://ja.wikipedia.org/wiki/HTTPステータスコード)
 
-EC-CUBE 3ではレスポンスを渡す時にHTTPステータスコードの`200`番台を返すようにします。
+In EC-CUBE 3, make sure that return `200` series of HTTP status code when transfer response.
 
 ```php
 $data = 'aaa';
 return $app->json($data, 201);
 ```
-ただし、正常系のGetメソッドに関してはHTTPステータスコードの`200`は渡しません。
+However, relating to Get method of normal systemただし、正常系のGetメソッドに関してはHTTPステータスコードの`200`は渡しません。
 
 ```php
 $data = 'aaa';
 return $app->json($data);
 ```
 
-#### エラー時のレスポンス
-HTTPステータスコードに加えてエラーが発生した場合、エラーコード, エラーメッセージ, エラー詳細などをJSONレスポンスで返すようにします。
-また、エラーが複数渡せるように配列にしておきます。
+#### Response when occurred error
+In case add into HTTP status code, and occurred error, make sure that return error code, error message, error detail by JSON response
+Morever, set array in order to transfer many error.
 
 ```json
 {
