@@ -12,7 +12,7 @@ In EC-CUBE 3
 * Implement API handling based on principle of REST
 * In REST, unique URI will be given for each resource which is called product list,　conduct operation such as submit and delete by sending parameter by HTTP method which is called GET and POST, PUT, DELETE with that URI.
 
-#### relevant page
+#### Relevant page
 [Web API Authorization ガイド](/api_authorization.html)  
 [EC-CUBE API β版 プラグイン スタートアップガイド](/web-api-doc.html)
 
@@ -40,9 +40,9 @@ Version is just interger, do not create minor version.
 
 ## resource name
 
-REST APIではURLでリソースを表現し、そのリソースへの操作をHTTPメソッドを用いて表現します。
+IN REST API, express resource by URL, use HTTP method to express the operation to that resource.
 
-resource example)
+Resource example)
 
 |目的|URL|HTTPメソッド|
 |---|---|---|
@@ -98,7 +98,7 @@ In EC-CUBE 3, make sure that return `200` series of HTTP status code when transf
 $data = 'aaa';
 return $app->json($data, 201);
 ```
-However, relating to Get method of normal systemただし、正常系のGetメソッドに関してはHTTPステータスコードの`200`は渡しません。
+However, relating to Get method of normal system, do not transfer `200` of HTTP status code.
 
 ```php
 $data = 'aaa';
@@ -126,22 +126,22 @@ Morever, set array in order to transfer many error.
 ```
 * 参考 [http://qiita.com/suin/items/f7ac4de914e9f3f35884](http://qiita.com/suin/items/f7ac4de914e9f3f35884)
 
-エラーが発生したときのステータスコードは処理によって異なりますが、基本は`400`番台を返すようにします。  
-また、レスポンスヘッダの内容については別途検討します。
+Status code when occurred error, will be different based on process. However basically, try to return `400` series.  
+However, contents of respose header will consider separately.
 
 
-## レスポンスヘッダについて
-今後、認証処理のヘッダ情報などEC-CUBE 3独自のヘッダ内容を記述します。
+## About response header
+In future, describe unique header contents of EC-CUBE 3 such as header info to authentication process
 
-## レスポンスのフォーマット
-レスポンスデータフォーマットはJSONのみを原則とします。
+## Format of response 
+As general rule, response data format will be just JSON.
 
 
-## 返り値について
-JSONの属性名に規約はありませんがJavaScriptの命名規約においてキャメルケースを使うケースが多いため、
-なるべく先頭小文字のキャメルケースを使う方が望ましいですが、EC-CUBE 3にとって使い勝手の良い形式とするため特に制約は設けません。
+## About return value
+There is no rule in property name of JSON, but there are many cases which use camel case for naming rule of JavaScript
+so that Use of camel case of the first lower character is expected. In EC-CUBE 3, there is not speial rule in order to tcreate user-friendly format.
 
-ただし、JSONの返り値の形式は必ず**key-value形式**にします。
+However, format of returned value will choose **key-value形式**
 
 ```json
 // サンプル
@@ -172,19 +172,20 @@ JSONの属性名に規約はありませんがJavaScriptの命名規約におい
 
 
 
-#### データ型
-1. Date型  
-日付データの形式にはRFC 3339を用います。また、時差対応しやすくするためUTCで返すことを原則とします。  
-例：2014-08-30T20:00:00Z
+#### Data type
+1. Date type    
+In format of date data, use RFC 3339. As general rule, return by UTC in order to hanとします。  
+Ex) 2014-08-30T20:00:00Z
 
-1. boolean型  
-true、falseを返します。
+1. boolean type  
+Return true, false.
 
-1. 数値型  
+
+1. Numeric value  
 文字列に変換するのではなく、数値のままで返すようにします。  
 ただし金額の場合、金額の値については文字列として表現("1000")します。
 
-1. 文字列
+1. Character string
 ""で囲んで文字列を返します。  
 タブや改行など、いくつかの特殊な文字はエスケープする必要があります。
 
@@ -260,22 +261,22 @@ EC-CUBE 3 では、 OpenID Connect を使用した
 
 #### 管理画面メンバー(Member)
 
-1. 管理画面→設定→システム情報設定→メンバー管理→メンバーの編集より **APIクライアント一覧** をクリックします。
-2. 「新規作成」より、APIクライアントを新規登録します。
-    - **アプリケーション名** には任意の名称を入力します
-    - **redirect_uri** には、Authorization Endpoint からのリダイレクト先の URL を入力します。ネイティブアプリやテスト環境用に `urn:ietf:wg:oauth:2.0:oob` を使用することも可能です。
-3. 登録が終わると、`client_id`, `client_secret` などが発行されます。公開鍵は `id_token` を検証する際に使用します。
-3. APIクライアントを実装します。
+1. Click 管理画面(management screen)→設定(setting)→システム情報設定(system info setting)→メンバー管理(member management)→ **APIクライアント一覧** from editing member
+2.  Register new APOI client from [新規作成](new create)
+    -  Input the optional name for **アプリケーション名** 
+    - In **redirect_uri**, input URL of direct destination from Authorization Endpoint. It is possible to use `urn:ietf:wg:oauth:2.0:oob` for Native App and Testing environment.
+3. If the registration has finished, `client_id`, `client_secret` will be issued. The public key will use when verify  `id_token` 
+3. Execute API Client
 
 #### 会員(Customer)
 
-1. mypage にログインし、 `/mypage/api` へアクセスします。
-2. **新規登録** をクリックし、 APIクライアントを新規登録します。
-    - **アプリケーション名** には任意の名称を入力します
-    - **redirect_uri** には、Authorization Endpoint からのリダイレクト先の URL を入力します。
-3. 登録が終わると、 `client_id`, `client_secret` などが発行されます。公開鍵は `id_token` を検証する際に使用します。
+1. Login in mypage, access to `/mypage/api` 
+2. Click **新規登録**, register new  API client 
+    - Input the optional name for  **アプリケーション名**
+    - In **redirect_uri** , input URL of direct destination from Authorization Endpoint
+3. If the registration has finished, `client_id`, `client_secret` will be issued. The public key will use when verify  `id_token`
 
-### サンプルクライアント
+### Sample client
 
 - [PHP(Symfony2) での実装例](https://github.com/nanasess/eccube3-oauth2-client)
 - [Python(Flask) での実装例](https://github.com/nanasess/eccube3-oauth2-client-for-python)
@@ -287,16 +288,16 @@ EC-CUBE 3 では、 OpenID Connect を使用した
     - Authorization Endpoint に `?state=<random_state>` を付与する必要があります
 
 
-## ドキュメント
-Swagger Editorを使ってWeb APIドキュメント(swagger.yml)を記述します。
+## Document
+Use Swagger Editor to describe Web API document (swagger.yml)
 
 [Swagger Editor](http://editor.swagger.io/)
 
 * 参考 [http://qiita.com/weed/items/539f6bbade6b75980468](http://qiita.com/weed/items/539f6bbade6b75980468)
 
 
-## 参考URL
-この指針は以下のサイトを参考にさせていただきました。
+## Reference URL
+This guidline will refer the following site
 
 [これから始めるエンタープライズ  Web API 開発](https://www.ogis-ri.co.jp/otc/hiroba/technical/WebAPI/part2.html)  
 [Web API設計指針を考えた](http://blog.mmmcorp.co.jp/blog/2015/07/01/web_api_guideline/index.html)  
