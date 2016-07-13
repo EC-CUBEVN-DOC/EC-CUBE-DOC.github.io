@@ -182,12 +182,12 @@ Return true, false.
 
 
 1. Numeric value  
-文字列に変換するのではなく、数値のままで返すようにします。  
-ただし金額の場合、金額の値については文字列として表現("1000")します。
+Remain numeric value and return without convert character string.  
+But in case of amount of money, display ("1000") value of amount of money as character string 
 
 1. Character string
-""で囲んで文字列を返します。  
-タブや改行など、いくつかの特殊な文字はエスケープする必要があります。
+Surround in "" and return character string.  
+It is necessary to escape Tab, lines breaks, some special characters.
 
 
 1. null扱い  
@@ -196,16 +196,16 @@ nullとして値がセットされていた場合、空文字などに変換せ�
 
 
 
-## URLパラメータ名
-URLパラメータ名はEntityのプロパティ名を基本的に利用します。(DBの項目名とは異なるプロパティ名もあります。)
-また、検索画面については以下の共通パラメータ指定を行います。
+## URL parameter name
+URL parameter name will use property name of Entity. (Sometimes, there are property names which are different with Item name od DB)
+Morever, about searching screen, conduct specifying the following common parameter.
 
-#### ページネーション
-`limit` と `offset` パラメータで指定することで、`offset`番目から`limit`件取得できるようにします。  
+#### Pagination
+By specifying parameter `limit` and `offset`, try to get record `limit` from `offset` .  
 例) `/products?limit=25&offset=50`
 
-戻り値のJSONには全レコード件数を metadata としてレスポンスに含めるようにします。
-省略時のデフォルト件数はデータサイズやアプリケーションによって決定します。
+In JSON of returned value, include all records into response as metadata.
+The number of default records when omitted, will decide based on data size and Application.
 
 ```json
 {
@@ -222,42 +222,43 @@ URLパラメータ名はEntityのプロパティ名を基本的に利用しま�
 }
 ```
 
-#### フィールド指定
-レスポンス量を増やさないために、フィールドを指定するとそのフィールドの値だけを返すように制御します。  
+#### Specify field
+Response volume will not increase, if specify field, control in order to return just value of that field.  
 例) `/products?fields=name,color,location`
 
-`fields` パラメータにカンマ区切りで指定することで指定したフィールドのみを返します。
+When specify in paramter `fields` by comma separated value, return just the specified field.
 
 
-## パラメータチェックについて
-FormTypeを利用できる箇所はFormTypeを使って入力チェックを行い、利用できない箇所は個別にチェックを行います。  
-個別入力チェックについては`Symfony\Component\Validator\Constraints`パッケージにあるクラスを極力使うようにします。
+## About parameter check
+Place that can use FormType will use FormType to check input, place that can not use, will check separately.  
+About individual input check, try to use class that exists in package `Symfony\Component\Validator\Constraints` as much as possible
 
-###### 個別入力チェックサンプル
+###### Individual input check sample
 
  
 <script src="http://gist-it.appspot.com/https://github.com/EC-CUBE/ec-cube.github.io/blob/master/Source/api/SampleValidate.php"></script>
 
-## 認証について
+## Authentication
 
-EC-CUBE で Web API を実行する際、一般公開された情報を参照する場合は必要ありませんが、顧客情報を参照したり、受注情報を更新する場合などは認証が必要です。
+In EC-CUBE, when excecute Web API, it is not necessary in case refer the general public info. But it is necessary for authentication in case refer the customer info or update the receiving order info.
 
-EC-CUBE 3 では、 OpenID Connect を使用した
+In EC-CUBE 3, OpenID Connect is used.
 
-[OAuth2.0 Authorization](http://openid-foundation-japan.github.io/rfc6749.ja.html) 及び [OpenID Connect](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html) をサポートしています。
+Supporting [OAuth2.0 Authorization](http://openid-foundation-japan.github.io/rfc6749.ja.html) and  [OpenID Connect](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html).
 
-詳しくは [Web API Authorization ガイド](/api_authorization.html) を参照してください。
+Please refer detail at [Web API Authorization ガイド](/api_authorization.html) 
 
-### 対応する認証フロー
+### The handled authentication flow
 
-以下の認証フローに対応しています。
+Handling for the following authentication flow
+
 
 - [OAuth2.0 Authorization Code Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-code) - 主にWebアプリ向け
 - [OAuth2.0 Implicit Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-implicit) - 主にJavaScript、 ネイティブアプリ向け
 - [OpenID Connect Authorization Code Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth) - 主にWebアプリ向け
 - [OpenID Connect Implicit Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#ImplicitFlowAuth) - 主にJavaScript、 ネイティブアプリ向け
 
-### 利用方法
+### Usage method
 
 #### 管理画面メンバー(Member)
 
