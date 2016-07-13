@@ -61,22 +61,21 @@ resource example)
 * URLは浅く保ち複雑なものはクエリストリングにする。
 * About Query string name, if transfer many by array, will set plural form; if just transfer a part, will set singular form.
 
-ただし、RESTには必ずこだわらず利便性を重要視します。
+However, in REST, emphasis convience without regard.
 
 
 ## API tthat is not suitable for REST
 In case of API that is not resource operation which is called search, use verb, not noun.
 
 ```
-例)
-https://ドメイン名/api/v1/search?name=aaaa&price=1000
+Ex)https://ドメイン名/api/v1/search?name=aaaa&price=1000
 
 
 
 ## error process
 
 #### HTTP status code 
-エラー発生時にHTTPステータスコードを使いますが、HTTPステータスコードは全て網羅せず以下に止めておきます。
+When occurred error, use HTTP status code, but HTTP status code will not cover all, stop as below
 
 |ステータスコード|目的|意味|
 |---|---|---|
@@ -90,7 +89,7 @@ https://ドメイン名/api/v1/search?name=aaaa&price=1000
 |500|Internal Server Error|サーバサイドでエラーが発生した場合に返される。|
 |503|Service Unavailable|サービス利用不可。サービスが一時的に過負荷やメンテナンスで使用不可能である。|
 
-* 参考 [https://ja.wikipedia.org/wiki/HTTPステータスコード](https://ja.wikipedia.org/wiki/HTTPステータスコード)
+* Reference  [https://ja.wikipedia.org/wiki/HTTPステータスコード](https://ja.wikipedia.org/wiki/HTTPステータスコード)
 
 EC-CUBE 3ではレスポンスを渡す時にHTTPステータスコードの`200`番台を返すようにします。
 
@@ -168,17 +167,17 @@ However, format of returned value will choose **key-value形式**
 
 
 
-#### データ型
+#### Data type
 1. Date type  
-日付データの形式にはRFC 3339を用います。また、時差対応しやすくするためUTCで返すことを原則とします。  
-例：2014-08-30T20:00:00Z
+In format of date data, use RFC 3339. As general rule, return by UTC in order to handle for  difference in time
+Ex) 2014-08-30T20:00:00Z
 
 1. boolean type  
-true、falseを返します。
+Return true, false.
 
 1. numeric type  
-文字列に変換するのではなく、数値のままで返すようにします。  
-ただし金額の場合、金額の値については文字列として表現("1000")します。
+Do not convert into character string, just remain numeric value and return.
+But, in case of amount of money, display("1000") value of amount of money by character string.
 
 1. character string
 Surround by "" and return character sting  
@@ -218,17 +217,17 @@ The number of default records when omitting, will decide based on Data size and 
 ```
 
 #### Specify Field
-レスポンス量を増やさないために、フィールドを指定するとそのフィールドの値だけを返すように制御します。  
+Response volume will not increase, so if specify field, control in order to return just that field  
 例) `/products?fields=name,color,location`
 
-`fields` パラメータにカンマ区切りで指定することで指定したフィールドのみを返します。
+Return only the specified field by specifying in parameter `fields` by Comma Separated Value
 
 
 ## About check paramter
-FormTypeを利用できる箇所はFormTypeを使って入力チェックを行い、利用できない箇所は個別にチェックを行います。  
-個別入力チェックについては`Symfony\Component\Validator\Constraints`パッケージにあるクラスを極力使うようにします。
+ABout place that can use FormType will use FormType to check input, place which can not use, will check separately.  
+ABout individual check will use class which exist in package `Symfony\Component\Validator\Constraints` as much as possible
 
-###### 個別入力チェックサンプル
+###### Individual input check sample
 
  
 <script src="http://gist-it.appspot.com/https://github.com/EC-CUBE/ec-cube.github.io/blob/master/Source/api/SampleValidate.php"></script>
@@ -237,22 +236,22 @@ FormTypeを利用できる箇所はFormTypeを使って入力チェックを行�
 
 IN EC-CUBE, when execute Web API, there is no need in case refer the general public. However it is necessary in case refer the customer info or update the receiving order info.
 
-EC-CUBE 3 では、 OpenID Connect を使用した
+In EC-CUBE 3, OpenID Connect was used
 
-[OAuth2.0 Authorization](http://openid-foundation-japan.github.io/rfc6749.ja.html) 及び [OpenID Connect](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html) をサポートしています。
+Supporting [OAuth2.0 Authorization](http://openid-foundation-japan.github.io/rfc6749.ja.html) and [OpenID Connect](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html) 
 
-詳しくは [Web API Authorization ガイド](/api_authorization.html) を参照してください。
+Detail will refer  [Web API Authorization ガイド](/api_authorization.html)
 
-### 対応する認証フロー
+### The handling authentication flow
 
-以下の認証フローに対応しています。
+Handling for the following authentication flow
 
 - [OAuth2.0 Authorization Code Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-code) - 主にWebアプリ向け
 - [OAuth2.0 Implicit Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-implicit) - 主にJavaScript、 ネイティブアプリ向け
 - [OpenID Connect Authorization Code Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth) - 主にWebアプリ向け
 - [OpenID Connect Implicit Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#ImplicitFlowAuth) - 主にJavaScript、 ネイティブアプリ向け
 
-### 利用方法
+### Usage method
 
 #### 管理画面メンバー(Member)
 
@@ -283,15 +282,15 @@ EC-CUBE 3 では、 OpenID Connect を使用した
     - Authorization Endpoint に `?state=<random_state>` を付与する必要があります
 
 
-## ドキュメント
-Swagger Editorを使ってWeb APIドキュメント(swagger.yml)を記述します。
+## Document
+Use Swagger Editor to describe Web API document (swagger.yml)
 
 [Swagger Editor](http://editor.swagger.io/)
 
 * 参考 [http://qiita.com/weed/items/539f6bbade6b75980468](http://qiita.com/weed/items/539f6bbade6b75980468)
 
 
-## 参考URL
+## Reference URL
 この指針は以下のサイトを参考にさせていただきました。
 
 [これから始めるエンタープライズ  Web API 開発](https://www.ogis-ri.co.jp/otc/hiroba/technical/WebAPI/part2.html)  
