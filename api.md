@@ -75,7 +75,7 @@ https://ドメイン名/api/v1/search?name=aaaa&price=1000
 
 ## error process
 
-#### HTTPステータスコード
+#### HTTP status code 
 エラー発生時にHTTPステータスコードを使いますが、HTTPステータスコードは全て網羅せず以下に止めておきます。
 
 |ステータスコード|目的|意味|
@@ -98,16 +98,17 @@ EC-CUBE 3ではレスポンスを渡す時にHTTPステータスコードの`200
 $data = 'aaa';
 return $app->json($data, 201);
 ```
-ただし、正常系のGetメソッドに関してはHTTPステータスコードの`200`は渡しません。
+However, relating to Get method of normal system, do not transfer `200` of HTTP status code
+ 
 
 ```php
 $data = 'aaa';
 return $app->json($data);
 ```
 
-#### エラー時のレスポンス
-HTTPステータスコードに加えてエラーが発生した場合、エラーコード, エラーメッセージ, エラー詳細などをJSONレスポンスで返すようにします。
-また、エラーが複数渡せるように配列にしておきます。
+#### Response of when was error 
+In case added in HTTP status code, and occurred error, make sure that return error code, error message, error detail by JSON response.
+And, set array in order to transfer many errors.
 
 ```json
 {
@@ -126,29 +127,24 @@ HTTPステータスコードに加えてエラーが発生した場合、エラ�
 ```
 * 参考 [http://qiita.com/suin/items/f7ac4de914e9f3f35884](http://qiita.com/suin/items/f7ac4de914e9f3f35884)
 
-エラーが発生したときのステータスコードは処理によって異なりますが、基本は`400`番台を返すようにします。  
-また、レスポンスヘッダの内容については別途検討します。
+Status code when occurred error, will be different based on process. However basically, try to return `400` series.   
+However, contents of respose header will consider separately.
 
 
-## レスポンスヘッダについて
-今後、認証処理のヘッダ情報などEC-CUBE 3独自のヘッダ内容を記述します。
+## About response header
+In future, describe unique header contents of EC-CUBE 3 such as header info to authentication process
 
-## レスポンスのフォーマット
-レスポンスデータフォーマットはJSONのみを原則とします。
+## Format of response
+As generalrule, response data format will be just JSON.
 
 
-## 返り値について
-JSONの属性名に規約はありませんがJavaScriptの命名規約においてキャメルケースを使うケースが多いため、
-なるべく先頭小文字のキャメルケースを使う方が望ましいですが、EC-CUBE 3にとって使い勝手の良い形式とするため特に制約は設けません。
+## About return value
+There is no rule in property name of JSON, but there are many cases which use camel case for naming rule of JavaScript
+so that Use of camel case of the first lower character is expected. In EC-CUBE 3, there is not speial rule in order to tcreate user-friendly format.
 
-ただし、JSONの返り値の形式は必ず**key-value形式**にします。
+However, format of returned value will choose **key-value形式**
 
-```json
-// サンプル
-{
-  "menu": {
-    "id": "file",
-    "value": "File",
+```jsonile",
     "popup": {
       "menuitem": [
         {"value": "New", "onclick": "CreateNewDoc()"},
@@ -173,38 +169,38 @@ JSONの属性名に規約はありませんがJavaScriptの命名規約におい
 
 
 #### データ型
-1. Date型  
+1. Date type  
 日付データの形式にはRFC 3339を用います。また、時差対応しやすくするためUTCで返すことを原則とします。  
 例：2014-08-30T20:00:00Z
 
-1. boolean型  
+1. boolean type  
 true、falseを返します。
 
-1. 数値型  
+1. numeric type  
 文字列に変換するのではなく、数値のままで返すようにします。  
 ただし金額の場合、金額の値については文字列として表現("1000")します。
 
-1. 文字列
-""で囲んで文字列を返します。  
-タブや改行など、いくつかの特殊な文字はエスケープする必要があります。
+1. character string
+Surround by "" and return character sting  
+It is neccessary to escape Tab, lines breaks, some special texts.
 
 
-1. null扱い  
-nullとして値がセットされていた場合、空文字などに変換せずそのまま返します。
+1. Use of null  
+In case value is set as, just leave it and return without converting into empty text.
 
 
 
 
-## URLパラメータ名
-URLパラメータ名はEntityのプロパティ名を基本的に利用します。(DBの項目名とは異なるプロパティ名もあります。)
-また、検索画面については以下の共通パラメータ指定を行います。
+## URL parameter name
+Basically, URL parameter name will use property name of Entity (Sometimes Item name of DB will be different with Property name)
+And, about searching screen, execute the following common paramter specification.
 
-#### ページネーション
-`limit` と `offset` パラメータで指定することで、`offset`番目から`limit`件取得できるようにします。  
-例) `/products?limit=25&offset=50`
+#### Pagination
+By specifying parameter of `limit`and `offset`, make sure that can get `limit` from `offset`  
+Ex)  `/products?limit=25&offset=50`
 
-戻り値のJSONには全レコード件数を metadata としてレスポンスに含めるようにします。
-省略時のデフォルト件数はデータサイズやアプリケーションによって決定します。
+In JSON of returned value, make sure that include all of records in Response as metadata.
+The number of default records when omitting, will decide based on Data size and Application
 
 ```json
 {
@@ -221,14 +217,14 @@ URLパラメータ名はEntityのプロパティ名を基本的に利用しま�
 }
 ```
 
-#### フィールド指定
+#### Specify Field
 レスポンス量を増やさないために、フィールドを指定するとそのフィールドの値だけを返すように制御します。  
 例) `/products?fields=name,color,location`
 
 `fields` パラメータにカンマ区切りで指定することで指定したフィールドのみを返します。
 
 
-## パラメータチェックについて
+## About check paramter
 FormTypeを利用できる箇所はFormTypeを使って入力チェックを行い、利用できない箇所は個別にチェックを行います。  
 個別入力チェックについては`Symfony\Component\Validator\Constraints`パッケージにあるクラスを極力使うようにします。
 
@@ -237,9 +233,9 @@ FormTypeを利用できる箇所はFormTypeを使って入力チェックを行�
  
 <script src="http://gist-it.appspot.com/https://github.com/EC-CUBE/ec-cube.github.io/blob/master/Source/api/SampleValidate.php"></script>
 
-## 認証について
+## About Authentication
 
-EC-CUBE で Web API を実行する際、一般公開された情報を参照する場合は必要ありませんが、顧客情報を参照したり、受注情報を更新する場合などは認証が必要です。
+IN EC-CUBE, when execute Web API, there is no need in case refer the general public. However it is necessary in case refer the customer info or update the receiving order info.
 
 EC-CUBE 3 では、 OpenID Connect を使用した
 
