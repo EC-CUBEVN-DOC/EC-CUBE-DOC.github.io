@@ -58,7 +58,7 @@ Resource example)
 * Put many basic concrete noun as name as much as possible
 * Show operation of resource by HTTP method
 * In order to be easy to understand, do not use deeply URL more than `/products/:id/xxxxx`.
-* URLは浅く保ち複雑なものはクエリストリングにする。
+* URLは浅く保ち複雑なものはクエリストリングにする。(※)
 * About Query string name, if transfer many by array, will set plural form; if just transfer a part, will set singular form.
 
 However, in REST emphasis the convience without regarding
