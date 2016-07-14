@@ -224,7 +224,7 @@ The number of default records when omitted, will decide based on data size and A
 
 #### Specify field
 Response volume will not increase, if specify field, control in order to return just value of that field.  
-例) `/products?fields=name,color,location`
+Ex) `/products?fields=name,color,location`
 
 When specify in paramter `fields` by comma separated value, return just the specified field.
 
