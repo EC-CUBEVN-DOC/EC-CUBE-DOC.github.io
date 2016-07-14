@@ -190,8 +190,8 @@ Surround in "" and return character string.
 It is necessary to escape Tab, lines breaks, some special characters.
 
 
-1. null扱い  
-nullとして値がセットされていた場合、空文字などに変換せずそのまま返します。
+1. Handle null  
+In case value is set as null, remain like that and return without converting into null text.
 
 
 
@@ -253,16 +253,16 @@ Please refer detail at [Web API Authorization ガイド](/api_authorization.html
 Handling for the following authentication flow
 
 
-- [OAuth2.0 Authorization Code Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-code) - 主にWebアプリ向け
-- [OAuth2.0 Implicit Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-implicit) - 主にJavaScript、 ネイティブアプリ向け
-- [OpenID Connect Authorization Code Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth) - 主にWebアプリ向け
-- [OpenID Connect Implicit Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#ImplicitFlowAuth) - 主にJavaScript、 ネイティブアプリ向け
+- [OAuth2.0 Authorization Code Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-code) - For Web App
+- [OAuth2.0 Implicit Flow](http://openid-foundation-japan.github.io/rfc6749.ja.html#grant-implicit) - For JavaScript , Native App
+- [OpenID Connect Authorization Code Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#CodeFlowAuth) - For Web App
+- [OpenID Connect Implicit Flow](http://openid-foundation-japan.github.io/openid-connect-core-1_0.ja.html#ImplicitFlowAuth) - For JavaScript, Native App
 
 ### Usage method
 
 #### 管理画面メンバー(Member)
 
-1. Click 管理画面(management screen)→設定(setting)→システム情報設定(system info setting)→メンバー管理(member management)→ **APIクライアント一覧** from editing member
+1. Click 管理画面(management screen)→設定(setting)→システム情報設定(system info setting)→メンバー管理(member management)→ **APIクライアント一覧**(API client list) from editing member
 2.  Register new APOI client from [新規作成](new create)
     -  Input the optional name for **アプリケーション名** 
     - In **redirect_uri**, input URL of direct destination from Authorization Endpoint. It is possible to use `urn:ietf:wg:oauth:2.0:oob` for Native App and Testing environment.
@@ -285,8 +285,8 @@ Handling for the following authentication flow
 - [C# での実装例(Web/Wpf)](https://github.com/nanasess/DotNetOpenAuth)
 - [Java での実装例](https://github.com/nanasess/eccube3-oauth2-client-for-java)
 - [Google OAuth 2.0 Playground](https://developers.google.com/oauthplayground/)
-    - OAuth 2.0 Configuration -> OAuth endpoint -> *Custom* にて動作確認済み
-    - Authorization Endpoint に `?state=<random_state>` を付与する必要があります
+    - Confirmed already operation in OAuth 2.0 Configuration -> OAuth endpoint -> *Custom* 
+    - It is necessary to give  `?state=<random_state>` for Authorization Endpoint.
 
 
 ## Document
@@ -294,7 +294,7 @@ Use Swagger Editor to describe Web API document (swagger.yml)
 
 [Swagger Editor](http://editor.swagger.io/)
 
-* 参考 [http://qiita.com/weed/items/539f6bbade6b75980468](http://qiita.com/weed/items/539f6bbade6b75980468)
+* Reference  [http://qiita.com/weed/items/539f6bbade6b75980468](http://qiita.com/weed/items/539f6bbade6b75980468)
 
 
 ## Reference URL
