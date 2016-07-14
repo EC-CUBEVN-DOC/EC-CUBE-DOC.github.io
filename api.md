@@ -44,7 +44,7 @@ IN REST API, express resource by URL, use HTTP method to express the operation t
 
 Resource example)
 
-|目的|URL|HTTPメソッド|
+|Purpose|URL|HTTP method|
 |---|---|---|
 |商品一覧の取得|/products|GET|
 |商品の新規登録|/products|POST|
